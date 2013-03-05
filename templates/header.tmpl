@@ -1,0 +1,28 @@
+// -*- mode: c++ -*-
+#include "geeell.h"
+#include "convert.h"
+
+using namespace v8;
+using namespace convert;
+
+void init_gl(Handle<Object> gl) {
+  GL_CONST(GL_TRUE);
+  GL_CONST(GL_FALSE);
+
+  // special case for glShaderSource until we figure out how to deal
+  // properly with strings
+  { Local<FunctionTemplate> tmpl =
+      FunctionTemplate::New
+      (JS_FUNC {
+        if (2 > args . Length ())
+          return ThrowException
+            (String::NewSymbol("Not enough arguments for glShaderSource (needs 2)"));
+        GLuint shader = JSTO<GLuint> (args[0]);
+        std::string s = JSTO<std::string> (args[1]);
+        const GLint len = s . size ();
+        glShaderSource (shader, 1, reinterpret_cast<const GLchar**> (&s[0]), &len);
+        return Undefined ();
+      });
+    gl -> Set (String::NewSymbol ("glShaderSource"), tmpl -> GetFunction ());
+  }
+

@@ -1,0 +1,15 @@
+  { Local<FunctionTemplate> tmpl =
+      FunctionTemplate::New
+      (JS_FUNC {       
+        if (args . Length () < {{ meth.args|length }})
+          return ThrowException
+            (String::New("Not enough arguments for {{ meth.name }} (needs {{ meth.args|length }})"));
+        {% for arg in meth.args %}
+        {{ arg }} arg_{{ loop.index0 }} = JSTO<{{ arg }}> (args[{{ loop.index0 }}]);
+        {% endfor %}
+        {{ meth.ret }} ret;
+        {{ meth.name }} ({% for arg in meth.args %}{% if 0 < loop.index0 %}, {% endif %}arg_{{ loop.index0 }}{%endfor%}, &ret);
+        return TOJS (ret);
+      });
+    gl -> Set (String::NewSymbol ("{{ meth.name }}"), tmpl -> GetFunction ());
+  }
