@@ -1,6 +1,22 @@
 {
-    "name": "simplegl",
-    "description": "A very simple OpenGL binding for V8",
-    "version": "0.1.0",
-    "engine": "node >= 0.8.18"
+  "name": "simplegl",
+  "description": "A very simple OpenGL binding for V8",
+  "version": "0.1.0",
+  "engine": "node >= 0.8.18",
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "readmeFilename": "README.md",
+  "gitHead": "b69e755b9823bec29efc8a6e6ca8804a17329550",
+  "main": "./build/Release/simplegl.node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cporter/simplegl.git"
+  },
+  "keywords": [
+    "opengl"
+  ],
+  "author": "Corey Porter <coreyaporter@gmail.com>",
+  "license": "MIT"
 }
