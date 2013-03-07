@@ -1,4 +1,6 @@
 
+#pragma once
+
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/glu.h>
@@ -18,5 +20,5 @@
 #define GL_CONST(NAM) gl -> Set (v8::String::NewSymbol(#NAM), v8::Number::New(NAM))
 
 void init_gl(v8::Handle<v8::Object>);
-
+void init_gl_byhand (v8::Handle<v8::Object>);
 

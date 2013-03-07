@@ -22,7 +22,7 @@
                 "libraries" : ["-framework OpenGL -framework AGL"]
             },
             "target_name": "simplegl",
-            "sources": ["src/geeell.cc", "src/simplegl.cc"]
+            "sources": ["src/geeell.cc", "src/geeell_by_hand.cc", "src/simplegl.cc"]
         }
     ]
 }

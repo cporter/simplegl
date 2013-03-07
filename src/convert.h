@@ -6,14 +6,14 @@
 namespace convert {
 using namespace v8;
 
-template <typename T> Handle<Value> TOJS (T) { return Undefined(); }
-template <typename T> T JSTO(Handle<Value>) { return T(); }
+template <typename T> inline Handle<Value> TOJS (T) { return Undefined(); }
+template <typename T> inline T JSTO(Handle<Value>) { return T(); }
 
 #define NUMBERISH(NAM)                             \
-  template <> Handle<Value> TOJS(NAM x) {   \
+  template <> inline Handle<Value> TOJS(NAM x) {   \
     return Number::New ((double) x);               \
   }                                                \
-  template <> NAM JSTO(Handle<Value> val) { \
+  template <> inline NAM JSTO(Handle<Value> val) { \
     return (NAM) val -> ToNumber () -> Value ();   \
   }
 
@@ -28,11 +28,11 @@ NUMBERISH(double);
 
 #undef NUMBERISH
 
-template<> Handle<Value> TOJS (std::string x) {
+template<> inline Handle<Value> TOJS (std::string x) {
   return String::New (x.data());
 }
 
-template<> std::string JSTO (Handle<Value> val) {
+template<> inline std::string JSTO (Handle<Value> val) {
   HandleScope scope;
   Local<String> s = val -> ToString ();
   std::string ret (1 + s -> Length (), 0);
