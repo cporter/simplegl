@@ -14,13 +14,24 @@
                             '-fexceptions',
                             '-Wno-ignored-qualifiers',
                             '-Qunused-arguments'
-                        ]
+                        ],
+                        "link_settings" : {
+                            "libraries" : ["-framework OpenGL -framework AGL"]
+                        }
+                    }
+                }],
+                ['OS=="linux"', {
+                    'cflags': [
+                        '-D_DEBUG',
+                        '-g',
+                        '-std=gnu++0x',
+                        '-fexceptions'
+                    ],
+                    "link_settings" : {
+                        "libraries" : ["-lGL"]
                     }
                 }]
             ],
-            "link_settings" : {
-                "libraries" : ["-framework OpenGL -framework AGL"]
-            },
             "target_name": "simplegl",
             "sources": ["src/geeell.cc", "src/geeell_by_hand.cc", "src/simplegl.cc"]
         }
