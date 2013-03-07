@@ -6,7 +6,7 @@ using namespace v8;
 using namespace convert;
 
 void init_gl(Handle<Object> gl) {
-
+  init_gl_byhand (gl);
   GL_CONST(GL_ACCUM);
   GL_CONST(GL_LOAD);
   GL_CONST(GL_RETURN);
