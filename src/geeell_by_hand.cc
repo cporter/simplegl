@@ -25,7 +25,6 @@ void init_gl_byhand (Handle<Object> gl) {
   GL_SIZEOF(GLclampf);
   GL_SIZEOF(GLdouble);
   GL_SIZEOF(GLclampd);
-  GL_SIZEOF(GLvoid);
 
   GL_CONST(GL_TRUE);
   GL_CONST(GL_FALSE);
