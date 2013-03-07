@@ -3,10 +3,10 @@ simplegl
 
 A very simple OpenGL binding for V8/node
 
-Building
+Installing
 --------
 
-installing using [npm](http://npmjs.org/) via [GitHub](http://github.com/)
+Installing using [npm](http://npmjs.org/) via [GitHub](http://github.com/)
 seems to be the easiest way:
 
     npm install cporter/simplegl
