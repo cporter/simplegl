@@ -7,11 +7,16 @@
             (String::New("Not enough arguments for {{ meth.name }} (needs {{meth.args|length}})"));
         {% for arg in meth.args %}
         {{ arg }} arg_{{ loop.index0 }} = JSTO<{{ arg }}> (args[{{ loop.index0 }}]);{% endfor %}
-        {% if meth.returns %}{{ meth.return_type }} ret ={% endif %}
-        {{ meth.name }} ({% for arg in meth.args %}
-          {% if 0 < loop.index0 %}, {% else %}  {% endif %}arg_{{ loop.index0 }}{% endfor %});
+
+        std::vector<{{ meth.typ }}> vect;
+        Handle<Array> arr = Handle<Array>::Cast (args[{{ meth.args|length }}]);
+        const size_t N = arr -> Length ();
+        vect . reserve (N);
+        for (size_t i = 0; i < N; ++i)
+          vect.push_back (JSTO<{{ meth.typ }}> (arr -> Get (i)));
+        {% if meth.returns %}{{ meth.return_type }}ret = {% endif %}
+        {{ meth.name }} ({% for arg in meth.args %}arg_{{ loop.index0 }}, {% endfor %}&vect[0]);
         {% if meth.returns %}return TOJS(ret);{% else %}return Undefined();{% endif %}
       });
     gl -> Set (String::NewSymbol ("{{ meth.name }}"), tmpl -> GetFunction ());
   }
-
